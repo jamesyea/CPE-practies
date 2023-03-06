@@ -3,6 +3,7 @@
 using namespace std;
 #define limit 1000000
 vector<bool> prime(limit+1,true);
+//sieve of Eratosthenes 質數篩
 void soe(){
     prime[0]=prime[1]=false;
     for(int i=2;i*i<=limit;++i){
