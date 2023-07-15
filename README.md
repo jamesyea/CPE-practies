@@ -6,4 +6,6 @@
 
 - **相關網站**<br>
 [CPE官網](https://cpe.cse.nsysu.edu.tw/environment.php)<br>
-[UVA online judge](https://onlinejudge.org/)
+[UVA online judge](https://onlinejudge.org/)<br>
+
+>___各位如果有注意到那個commit是updata就別在意，是我不小心打太快沒注意到___
