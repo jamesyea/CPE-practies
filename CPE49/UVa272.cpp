@@ -2,13 +2,16 @@
 using namespace std;
 int main(){
     string s;
-    int cnt=0;
+    int check=true;
     while (getline(cin,s)){
-        for(int i=0;s.length();i++){
-            if(s[i]=='\"'){
-                if(cnt%2==0) cout<<"``";
-                else cout<<"''";
-                cnt++;
+        for(int i=0;i<s.length();i++){
+            if(s[i]=='"' && check==true){
+                cout<<"``";
+                check=false;
+            }
+            else if(s[i]=='"' && check==false){
+                cout<<"''";
+                check=true;
             }
             else cout<<s[i];
         }
