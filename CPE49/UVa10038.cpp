@@ -24,11 +24,9 @@ int main(){
                 }
                 check[d]=true;
             }
-            if(flag){
-                cout<<"Jolly"<<endl;
-            }else{
-                cout<<"Not jolly"<<endl;
-            }
+            if(flag)cout<<"Jolly"<<endl;
+            else cout<<"Not jolly"<<endl;
+            
         }
     }
 }
