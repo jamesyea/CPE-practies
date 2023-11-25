@@ -1,24 +1,30 @@
 #include<iostream>
 #include<sstream>
 #include<string>
+#include<vector>
 using namespace std;
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
     int x;
     while(cin>>x){
         string s;
-        getline(cin,s);
-        getline(cin,s);
-        int n=0,a;
-        stringstream s1(s);
-        while(s1>>a) n++;
-        n--;
-        stringstream s2(s);
-        long long val=0;
-        while(s2>>a){
-            if(n==0) break;
-            val*=x;
-            val+=n--*a;
+        cin.ignore();
+        getline(cin,s);//1 -1
+        stringstream ss(s);
+        int t;
+        vector<long long> num;
+        while(ss>>t){
+            num.push_back(t);
         }
-        cout<<val<<endl;
+        long long ans=0;
+        num.pop_back();
+        int n=num.size();
+        for(int i=0;i<num.size();i++){
+            ans*=x;
+            ans+=num[i]*n;
+            n--;
+        }
+        cout<<ans<<endl;
     }
 }
