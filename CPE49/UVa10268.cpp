@@ -12,7 +12,7 @@ int main(){
         cin.ignore();
         getline(cin,s);//1 -1
         stringstream ss(s);
-        int t;
+        long long t;
         vector<long long> num;
         while(ss>>t){
             num.push_back(t);
