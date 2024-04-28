@@ -1,40 +1,38 @@
 #include<iostream>
+#include<algorithm>
 #include<vector>
-#include<cstring>
-#include<cctype>
-#define len 5000
 using namespace std;
-int main(){
-    int x;
-    cin>>x;
-    
-    char msg[len];
-    char alp[28]="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    int num[28]={};
-    for(int k=0;k<x+1;k++){
-        cin.getline(msg,len);
-        for(int i=0;i<strlen(msg);i++){
-            if(isalpha(msg[i]))
-                num[toupper(msg[i])-'A']++;
-        }
-    }
-    int temp;
-    for(int i=0;i<26;i++){
-        for(int j=0;j<26;j++){
-            if(num[j]<num[j+1]){
-                temp=num[j];
-                num[j]=num[j+1];
-                num[j+1]=temp;
+struct Count{
+    char c;
+    int n;
+};
+bool cmp(Count a,Count b){
+    if(a.n==b.n) return a.c < b.c;
+    return a.n > b.n;
+}
 
-                temp=alp[j];
-                alp[j]=alp[j+1];
-                alp[j+1]=temp;
+int main(){
+    int n;
+    cin>>n;
+    cin.ignore();
+    vector<Count> a(26);
+    for(int i=0;i<26;i++){
+        a[i].c='A'+i;
+        a[i].n=0;
+    }
+    while(n--){
+        string s;
+        getline(cin,s);
+        for(int i=0;i<s.length();i++){
+            if(islower(s[i]) || isupper(s[i])){
+                a[toupper(s[i])-'A'].n++;
             }
         }
     }
+    sort(a.begin(),a.end(),cmp);
     for(int i=0;i<26;i++){
-        if(num[i])
-            cout<<alp[i]<<" "<<num[i]<<endl;
+        if(a[i].n){
+            cout<<a[i].c<<" "<<a[i].n<<endl;
+        }
     }
-    
 }
