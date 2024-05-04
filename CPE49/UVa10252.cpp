@@ -4,10 +4,8 @@ using namespace std;
 int main(){
     string a,b;
     while(getline(cin,a) && getline(cin,b)){
-        vector<int> cnt_a;
-        cnt_a.resize(26);
-        vector<int> cnt_b;
-        cnt_b.resize(26);
+        vector<int> cnt_a(26,0);
+        vector<int> cnt_b(26,0);
         for(int i=0;i<a.length();i++){
             cnt_a[a[i]-'a']++;
         }
