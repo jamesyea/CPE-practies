@@ -13,7 +13,10 @@ bool comp(map a,map b){
 }
 int main(){
     string s;
+    bool first=true;
     while(getline(cin,s)){
+        if(first) first=false;
+        else cout<<endl
         map ch[95]; //ascii 32~126
         for(int i=0;i<95;i++){
             ch[i].ascii=i+32;
@@ -28,6 +31,6 @@ int main(){
                 cout<<ch[i].ascii<<" "<<ch[i].cnt<<endl;
             }
         }
-        cout<<endl;
+        
     }
 }
