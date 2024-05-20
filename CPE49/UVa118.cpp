@@ -1,61 +1,48 @@
 #include<iostream>
+#include<vector>
 using namespace std;
+char dir[4]={'N','E','S','W'};
+int dir_for[4][2]={{1,0},{0,1},{-1,0},{0,-1}};
+int mx,my;
+bool check_drop(int x,int y){
+    if(x<0 || y<0 || x>mx || y>my) return true;
+    return false;
+}
+
 int main(){
-    int x,y;
-    int s_x,s_y,rdir;
+    cin>>mx>>my;
+    vector<vector<bool>> drop(my+1,vector<bool>(mx+1,false));
+    int nx,ny;
     char face;
-    char dir[4]={'N','E','S','W'};
-    char dir_pos[4][2]={{0,1},{1,0},{0,-1},{-1,0}};//四方位前進方向
-    cin>>x>>y;
-    int lost[x][y];
-    for(int i=0;i<x;i++){
-        for(int j=0;i<y;i++){
-            lost[x][y]=0;/*???*/
-        }
-    }
-    while(cin>>s_x>>s_y>>face){
-        string s;
-        cin>>s;
+    while(cin>>nx>>ny>>face){
+        int ndir;
         for(int i=0;i<4;i++){
-            if(face==dir[i]){
-                rdir=i;
+            if(dir[i]==face){
+                ndir=i;
                 break;
             }
         }
-        int i;
-        for(i=0;i<s.length();i++){
-            if(s[i]=='L'){
-                rdir=(rdir+3)%4;
-            }
-            else if(s[i]=='R'){
-                rdir=(rdir+1)%4;
-            }
-            else if(s[i]=='F'){
-                s_x=s_x+dir_pos[rdir][0];
-                s_y=s_y+dir_pos[rdir][1];
-                //掉出邊界
-                if(s_x<0 || s_y<0 || s_x>x || s_y>y){
-                    //如果有之前掉落機器人的紀錄
-                    if(lost[s_x-dir_pos[rdir][0]][s_y-dir_pos[rdir][1]]==1){
-                        s_x-=dir_pos[rdir][0];
-                        s_y-=dir_pos[rdir][1];
-                    }
-                    else{
-                        if(s_x>x) s_x=x;
-                        else if(s_x<0) s_x=0;
-
-                        if(s_y>y) s_y=y;
-                        else if(s_y<0) s_y=0;
-
-                        lost[s_x][s_y]=1;
-                        break;
-                    }
+        string com;
+        cin>>com;
+        bool lost=false;
+        for(int i=0;i<com.length();i++){
+            if(com[i]=='R') ndir=(ndir+1)%4;
+            else if(com[i]=='L') ndir=(ndir+3)%4;
+            else if(com[i]=='F'){
+                if(check_drop(nx+dir_for[ndir][1],ny+dir_for[ndir][0]) && !drop[ny][nx]){
+                    lost=true;
+                    drop[ny][nx]=true;
+                    break;
+                }else if(check_drop(nx+dir_for[ndir][1],ny+dir_for[ndir][0]) && drop[ny][nx]){
+                    continue;
                 }
+                nx+=dir_for[ndir][1];
+                ny+=dir_for[ndir][0];
             }
         }
-        cout<<s_x<<" "<<s_y<<" "<<dir[rdir];
-        if(i<s.length())
-            cout<<" LOST";
+        cout<<nx<<" "<<ny<<" "<<dir[ndir];
+        if(lost) cout<<" LOST";
         cout<<endl;
     }
+    
 }
